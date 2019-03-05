@@ -35,12 +35,22 @@ var coordenadas = {
   "longitude" : "2"
 };
 
+var message = "Te has conectado"
+
 
 //Este es el chido (Aqui se conecta Angular)
 io.on('connection', function (socket) {
   web_sockets.push(socket)
 
-  socket.emit('coordenates', coordenadas); 
+  socket.emit('welcome', message); 
+
+  socket.on('gps', function (data) {  
+    socket.emit('coordinates', data);
+  });
+
+  socket.on('get_gps', function () {  
+    socket.emit('coordinates', coordenadas);
+  });
 
   socket.on('disconnect', function () {
     var idx = web_sockets.indexOf(socket);
