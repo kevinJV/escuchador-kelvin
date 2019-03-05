@@ -45,7 +45,7 @@ io.on('connection', function (socket) {
   socket.emit('welcome', message); 
 
   socket.on('gps', function (data) {  
-    socket.broadcast('coordinates', data);
+    socket.emit('coordinates', data);
   });
 
   socket.on('get_gps', function () {  
